@@ -1,0 +1,61 @@
+{% include 'header.html.twig' %}
+<div class="row">
+    <div class="jumbotron bg-dark text-white pt-3 pb-3">
+        <h1 class="display-4 text-center">Gitár módosítás</h1>
+    </div>
+</div>
+
+<div class="container mt-5 d-flex justify-content-center">
+    <div class="col-sm-6">
+
+        <form action="/guitarEdit" method="POST">
+            <input type="hidden" value="{{ guitar.id }}" name="id">
+            <div class="form-group">
+                <label for="manufacturer">Gyártó*</label>
+                <input type="text" class="form-control" name="manufacturer" id="manufacturer"
+                    value="{{guitar.gyarto}}" required>
+            </div>
+            <div class="form-group">
+                <label for="type">Típus*</label>
+                <input type="text" class="form-control" name="type" id="type"
+                    value="{{guitar.tipus}}" required>
+            </div>
+            <div class="form-group">
+                <label for="guitarCategory">Kategória*</label>
+                <select name="guitarCategory" class="form-control" id="guitarCategory">
+                    {% for guitarCategory in guitarCategories %}
+                        <option value="{{guitarCategory.id}}" {{guitarCategory.id == guitar.kategoria_id ? 'selected':''}}> {{guitarCategory.nev}} </option>
+                    {% endfor %}
+
+                    ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="numberOfStrings">Húrok száma</label>
+                <input type="number" class="form-control" name="numberOfStrings" id="numberOfStrings"
+                    value="{{guitar.hurok_szama}}">
+            </div>
+            <div class="form-group">
+                <label for="price">Ár*</label>
+                <input type="number" class="form-control" name="price" id="price"
+                    value="{{guitar.ar}}" required>
+            </div>
+            <div class="form-group">
+                <label for="qty">Raktár mennyiség</label>
+                <input type="number" class="form-control" name="qty" id="qty"
+                    value="{{guitar.raktar_mennyiseg}}">
+            </div>
+            <div class="form-check mt-3">
+                <input type="checkbox" name="status" id="status" {{ guitar.allapot ? 'checked':''}}>
+                <label for="status">Aktív</label>
+            </div>
+            <div class="form-group mt-3 justify-content-between d-flex">
+                <a href="javascript:history.go(-1)" class="btn btn-warning"><i class="fa-solid fa-arrow-left"></i> Vissza</a>
+                <button type="submit" class="btn btn-success text-white" name="update"><i class="fa-solid fa-floppy-disk"></i> Módosít</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+{% include 'footer.html.twig' %}

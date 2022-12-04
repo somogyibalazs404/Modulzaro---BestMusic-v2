@@ -1,0 +1,42 @@
+{% include 'header.html.twig' %}
+<div class="row">
+	<div class="jumbotron bg-dark text-white pt-3 pb-3">
+		<h1 class="display-4 text-center">Gitárok</h1>
+	</div>
+</div>
+<div class="container">
+
+	<a href="/guitarAdd" class="btn btn-primary text-white mt-2">
+		<i class="fa-solid fa-plus"></i>
+		Új Gitár</a>
+	<table class="table table-hover mt-4 text-white text-center">
+		<tr>
+			<th>ID</th>
+			<th>Gyártó</th>
+			<th>Típus</th>
+			<th>Kategória</th>
+			<th>Húrok száma</th>
+			<th>Ár</th>
+			<th>Raktár mennyiség</th>
+			<th>Aktív-e</th>
+			<th>Műveletek</th>
+		</tr>
+		{% for guitar in guitars %}
+			<tr>
+				<td>{{guitar.id}}</td>
+				<td>{{guitar.gyarto}}</td>
+				<td>{{guitar.tipus}}</td>
+				<td>{{guitar.nev}}</td>
+				<td>{{guitar.hurok_szama}}</td>
+				<td>{{guitar.ar}}</td>
+				<td>{{guitar.raktar_mennyiseg}}</td>
+				<td>{{guitar.allapot ? 'Aktív' : 'Inaktív'}}</td>
+				<td>
+					<a class='btn btn-warning m-2' href='guitarEdit/{{guitar.id}}'>Módosít</a>
+					<a class='btn btn-danger m-2' href='guitarDelete/{{guitar.id}}'>Törlés</a>
+				</td>
+			</tr>
+		{% endfor %}
+	</table>
+</div>
+{% include 'footer.html.twig' %}
